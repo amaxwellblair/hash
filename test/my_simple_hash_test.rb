@@ -3,32 +3,35 @@ require 'simplecov'
 SimpleCov.start
 require 'minitest'
 require 'pry'
+require 'my_simple_hash'
 
-class MyHashTest < Minitest::Test
+class MySimpleHashTest < Minitest::Test
   attr_reader :hash
 
   def setup
-    @hash = MyHash.new
+    @hash = MySimpleHash.new
   end
 
   def test_class
-    skip
-    assert_equal MyHash, hash.class
+    assert_equal MySimpleHash, hash.class
   end
 
-  def test_initialize
-    skip
-    assert_equal nil, hash.output
+  def test_initialize_with_arguments
+    hash = MySimpleHash.new("k", 9)
+    assert_equal 9, hash.retrieve("k")
+  end
+
+  def test_retreive_not_in_hash
+    hash = MySimpleHash.new("k", 9)
+    assert_equal nil, hash.retrieve("hello")
   end
 
   def test_insert_one_unit
-    skip
     hash.insert("h", 9)
     assert_equal 9, hash.retrieve("h")
   end
 
   def test_insert_two_unit
-    skip
     hash.insert("h", 9)
     hash.insert("k", 10)
     assert_equal 9, hash.retrieve("h")
@@ -36,7 +39,6 @@ class MyHashTest < Minitest::Test
   end
 
   def test_overwrite
-    skip
     hash.insert("h", 9)
     hash.insert("h", 10)
     assert_equal 10, hash.retrieve("h")
