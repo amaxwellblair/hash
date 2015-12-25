@@ -19,22 +19,39 @@ class LinkedList
   end
 
   def find(key)
-    find_upstream_node(key).link.value
+    found = find_node(key)
+    return nil if found.nil?
+    found.value
   end
 
   def delete(key, node = head)
     upstream_node = find_upstream_node(key)
     deleted_node = upstream_node.link
-    if deleted_node.link.nil?
-      upstream_node.link = nil
+    if upstream_node == head && upstream_node.key == key
+      @head = deleted_node
     else
       upstream_node.link = deleted_node.link
     end
   end
 
+  def find_node(key, node = head)
+    if node.nil?
+      puts "Key not found with in hash"
+    elsif node.key == key
+      return node
+    else
+      find_node(key, node.link)
+    end
+  end
+
   def find_upstream_node(key, node = head)
-    return node if node.link.key == key
-    find_upstream_node(key, node.link)
+    if node.link.nil? && node.key != key
+      puts "Key not found with in hash"
+    elsif node.key == key || node.link.key == key
+      return node
+    else
+      find_upstream_node(key, node.link)
+    end
   end
 
   def create_node(key, value, link = nil)

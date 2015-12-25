@@ -4,39 +4,45 @@ SimpleCov.start
 require 'minitest'
 require 'pry'
 require 'chain_hash'
+require 'linked_list'
 
 class ChainHashTest < Minitest::Test
 
+  attr_reader :hash
+
   def setup
-    skip
+    list = LinkedList.new
+    @hash = ChainHash.new("m", "blair", list)
   end
 
   def test_class
-    skip
+    assert_equal ChainHash, hash.class
   end
 
-  def test_simple_insert
-    skip
+  def test_initialize_with_arguments
+    assert_equal "blair", hash.retrieve("m")
   end
 
-  def test_extract
-    skip
+  def test_retreive_not_in_hash
+    assert_equal nil, hash.retrieve("hello")
   end
 
-  def test_keys
-    skip
+  def test_insert_one_unit
+    hash.insert("h", 9)
+    assert_equal 9, hash.retrieve("h")
   end
 
-  def test_values
-    skip
+  def test_insert_two_unit
+    hash.insert("h", 9)
+    hash.insert("k", 10)
+    assert_equal 9, hash.retrieve("h")
+    assert_equal 10, hash.retrieve("k")
   end
 
-  def test_insert_more_than_the_size_of_the_array
-    skip
-  end
-
-  def test_enumerables
-    skip
+  def test_overwrite
+    hash.insert("h", 9)
+    hash.insert("h", 10)
+    assert_equal 10, hash.retrieve("h")
   end
 
 end
