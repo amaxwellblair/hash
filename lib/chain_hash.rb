@@ -1,12 +1,24 @@
 require 'pry'
 require 'digest'
+require 'linked_list'
 
 class ChainHash
   attr_reader :internal_array
 
-  def initialize(key = nil, value = nil, list)
-    @internal_array = Array.new(3, list)
+  def initialize(key = nil, value = nil)
+    @internal_array = Array.new(10)
+    insert_lists
     insert(key, value)
+  end
+
+  def insert_lists
+    internal_array.length.times do |index|
+      internal_array[index] = create_list
+    end
+  end
+
+  def create_list
+    LinkedList.new
   end
 
   def insert(key, value)
@@ -19,7 +31,7 @@ class ChainHash
   end
 
   def key_in_hash?(key)
-    internal_array[hash_index(key)].find(key) == true
+    !internal_array[hash_index(key)].find(key).nil?
   end
 
   def hash_index(key)

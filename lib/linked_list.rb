@@ -35,8 +35,9 @@ class LinkedList
   end
 
   def find_node(key, node = head)
+    # binding.pry
     if node.nil?
-      puts "Key not found with in hash"
+      nil
     elsif node.key == key
       return node
     else
@@ -46,7 +47,7 @@ class LinkedList
 
   def find_upstream_node(key, node = head)
     if node.link.nil? && node.key != key
-      puts "Key not found with in hash"
+      nil
     elsif node.key == key || node.link.key == key
       return node
     else

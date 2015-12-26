@@ -11,15 +11,14 @@ class ChainHashTest < Minitest::Test
   attr_reader :hash
 
   def setup
-    list = LinkedList.new
-    @hash = ChainHash.new("m", "blair", list)
+    @hash = ChainHash.new("m", "blair")
   end
 
   def test_class
     assert_equal ChainHash, hash.class
   end
 
-  def test_initialize_with_arguments
+  def test_intialize
     assert_equal "blair", hash.retrieve("m")
   end
 
@@ -35,6 +34,20 @@ class ChainHashTest < Minitest::Test
   def test_insert_two_unit
     hash.insert("h", 9)
     hash.insert("k", 10)
+    assert_equal 9, hash.retrieve("h")
+    assert_equal 10, hash.retrieve("k")
+  end
+
+  def test_insert_nine_units
+    hash.insert("h", 9)
+    hash.insert("k", 10)
+    hash.insert("z", 25)
+    hash.insert("x", -5)
+    hash.insert("chicken", 100)
+    hash.insert("poop", 55)
+    hash.insert("gerald", 10)
+    hash.insert("kimberly", 7)
+    hash.insert("max", 999999)
     assert_equal 9, hash.retrieve("h")
     assert_equal 10, hash.retrieve("k")
   end
