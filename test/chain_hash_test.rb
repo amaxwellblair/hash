@@ -38,6 +38,22 @@ class ChainHashTest < Minitest::Test
     assert_equal 10, hash.retrieve("k")
   end
 
+  def test_return_all_keys
+    hash.insert("h", 9)
+    hash.insert("k", 10)
+    hash.insert("j", 11)
+    hash.insert("l", 12)
+    assert_equal %w(h k j l), hash.keys
+  end
+
+  def test_return_all_values
+    hash.insert("h", 9)
+    hash.insert("k", 10)
+    hash.insert("j", 11)
+    hash.insert("l", 12)
+    assert_equal [9, 10, 11, 12], hash.values
+  end
+
   def test_insert_nine_units
     hash.insert("h", 9)
     hash.insert("k", 10)

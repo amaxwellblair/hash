@@ -23,7 +23,13 @@ class ChainHash
 
   def keys
     internal_array.flat_map do |list|
-      list
+      list.all_keys
+    end
+  end
+
+  def values
+    internal_array.flat_map do |list|
+      list.all_values
     end
   end
 
