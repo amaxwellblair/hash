@@ -53,4 +53,18 @@ class LinkedListTest < Minitest::Test
     assert_equal "warlock", list.tail.value
   end
 
+  def test_all_keys
+    list.append(:it, "value")
+    list.append(:imp, "warlock")
+    list.append(:taste, "bacon")
+    assert_equal [:it, :imp, :taste], list.all_keys
+  end
+
+  def test_all_values
+    list.append(:it, "value")
+    list.append(:imp, "warlock")
+    list.append(:taste, "bacon")
+    assert_equal ["value", "warlock", "bacon"], list.all_values
+  end
+
 end

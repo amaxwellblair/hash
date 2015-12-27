@@ -34,6 +34,24 @@ class LinkedList
     end
   end
 
+  def all_keys(node = head, key_array = [])
+    if node.nil?
+      return key_array
+    else
+      key_array << node.key
+      all_keys(node.link, key_array)
+    end
+  end
+
+  def all_values(node = head, value_array = [])
+    if node.nil?
+      return value_array
+    else
+      value_array << node.value
+      all_values(node.link, value_array)
+    end
+  end
+
   def find_node(key, node = head)
     # binding.pry
     if node.nil?

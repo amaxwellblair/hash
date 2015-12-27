@@ -21,6 +21,12 @@ class ChainHash
     LinkedList.new
   end
 
+  def keys
+    internal_array.flat_map do |list|
+      list
+    end
+  end
+
   def insert(key, value)
     if key_in_hash?(key)
       internal_array[hash_index(key)].delete(key)
